@@ -6,7 +6,11 @@ const port = 8080;
 app.set('view engine', 'ejs');
 
 app.get("/", (req, res) => {
-    res.send("Rota Principal");
+    res.render("index");
+})
+
+app.get("/perguntas", (req, res) => {
+    res.render('perguntas')
 })
 
 app.listen(port, () => {
