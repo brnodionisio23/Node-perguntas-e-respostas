@@ -1,0 +1,11 @@
+:root {
+    --bc-color: #eceff1;
+}
+
+body {
+    background-color: var(--bc-color);
+}
+
+#formulario-pergunta {
+    margin-top: 5vh;
+}
