@@ -1,17 +1,24 @@
 const express = require("express");
 const app = express();
-// a biblioteca body-parser tem a finalidade de pegar os dados de uma requisição
-// http e converter para outros tipos como json
 const bodyParser = require("body-parser");
+// importamos os componentes do modulo db.js
+const { connection, porta, banco } = require("./db/db");
 
 const port = 8080;
 
+// mostramos pelo terminal se a conexão foi ou não realizada com sucesso
+connection.authenticate()
+    .then(() => {
+        console.log(`Conectado com sucesso ao banco: ${banco}, na porta ${porta}`);
+    })
+    .catch(err => {
+        console.error('Erro ao conectar ao banco de dados:', err);
+    });
+
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
-// esta função tem a finalidade de manipular dados vindo de um fomulário codificado
-// em url e o objeto impede que dados complexo trafeguem por ele
 app.use(bodyParser.urlencoded({ extended: false }));
-// Permite manipular dados no formato json
+
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
@@ -23,7 +30,6 @@ app.get("/perguntas", (req, res) => {
 })
 
 app.post("/salvarPergunta", (req, res) => {
-    // apos o cliente enviar os dados eles serão capturados pelo bodyParser
     let titulo = req.body.titulo;
     let descricao = req.body.descricao;
     res.send();
