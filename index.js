@@ -1,15 +1,15 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-// importamos os componentes do modulo db.js
 const { connection, porta, banco } = require("./db/db");
+// ao fazer a requisição, automaticamente o model e executado
+const perguntaModel = require('./db/models/Pergunta');
 
 const port = 8080;
 
-// mostramos pelo terminal se a conexão foi ou não realizada com sucesso
 connection.authenticate()
     .then(() => {
-        console.log(`Conectado com sucesso ao banco: ${banco}, na porta ${porta}`);
+        console.log(`Conectado com sucesso ao banco: ${banco}, na porta: ${porta}`);
     })
     .catch(err => {
         console.error('Erro ao conectar ao banco de dados:', err);
