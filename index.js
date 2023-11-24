@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const { connection, porta, banco } = require("./db/db");
-// ao fazer a requisição, automaticamente o model e executado
 const perguntaModel = require('./db/models/Pergunta');
 
 const port = 8080;
@@ -32,7 +31,11 @@ app.get("/perguntas", (req, res) => {
 app.post("/salvarPergunta", (req, res) => {
     let titulo = req.body.titulo;
     let descricao = req.body.descricao;
-    res.send();
+    // o metodo create tem a função de criar uma nova linha na tabela do db
+    perguntaModel.create({
+        titulo: titulo,
+        descricao: descricao
+    })
 })
 
 app.listen(port, () => {
