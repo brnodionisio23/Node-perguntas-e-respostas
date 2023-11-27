@@ -21,10 +21,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-    // quando acessarmos a rota "/" resgatamos todos os dados do db e quando isso
-    // for feito, imprimira no console a lista
-    perguntaModel.findAll({ raw: true }).then(perguntas => console.log(perguntas))
-    res.render("index");
+    perguntaModel.findAll({ raw: true }).then(perguntas => {
+        // quando resgatar os dados, enviara para o index atraves da variavel perguntas
+        res.render("index", {
+            perguntas: perguntas
+        });
+    })
 })
 
 app.get("/perguntas", (req, res) => {
