@@ -18,7 +18,6 @@ Pergunta.sync({ force: false })
     });
 
 
-// exportando o model para outros serviços utilizar
 module.exports = Pergunta;
 
 

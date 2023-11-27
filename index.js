@@ -21,6 +21,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
+    // quando acessarmos a rota "/" resgatamos todos os dados do db e quando isso
+    // for feito, imprimira no console a lista
+    perguntaModel.findAll({ raw: true }).then(perguntas => console.log(perguntas))
     res.render("index");
 })
 
@@ -31,7 +34,6 @@ app.get("/perguntas", (req, res) => {
 app.post("/salvarPergunta", (req, res) => {
     let titulo = req.body.titulo;
     let descricao = req.body.descricao;
-    // o metodo create tem a função de criar uma nova linha na tabela do db
     perguntaModel.create({
         titulo: titulo,
         descricao: descricao
