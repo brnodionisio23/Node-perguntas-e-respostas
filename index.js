@@ -21,8 +21,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-    // com o objeto order podemos definir a ordem de posionamento dos elementos
-    // no caso utilizando a coluna id do maior para o menor (do mais novo ao mais antigo)
     perguntaModel.findAll({ raw: true, order: [['id', 'DESC']] }).then(perguntas => {
         res.render("index", {
             perguntas: perguntas
@@ -42,6 +40,21 @@ app.post("/salvarPergunta", (req, res) => {
         descricao: descricao
     })
     res.redirect("/");
+})
+
+app.get("/pergunta/:id", (req, res) => {
+    let id = req.params.id;
+    perguntaModel.findOne({
+        where: { id: id }
+    }).then((pergunta) => {
+        if (pergunta != undefined) {
+            res.render("pergunta", {
+                pergunta: pergunta
+            });
+        } else {
+            res.redirect("/");
+        }
+    })
 })
 
 app.listen(port, () => {
