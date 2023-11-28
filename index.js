@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const { connection, porta, banco } = require("./db/db");
 const perguntaModel = require('./db/models/Pergunta');
+const respostaModel = require('./db/models/Resposta');
 
 const port = 8080;
 
