@@ -4,7 +4,8 @@ const banco = 'perguntaserepostas';
 
 const connection = new Sequelize(banco, 'root', '123456', {
     host: 'localhost',
-    dialect: 'mysql'
+    dialect: 'mysql',
+    logging: false
 });
 
 module.exports = {

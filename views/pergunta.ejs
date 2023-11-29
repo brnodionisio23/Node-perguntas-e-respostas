@@ -11,10 +11,11 @@
                     <%=pergunta.descricao%>
                 </h3>
                 <br>
-                <form action="">
+                <form method="POST" action="/responderPergunta">
                     <label>Responda:</label>
                     <textarea name="corpo" class="form-control"></textarea>
                     <br>
+                    <input type="hidden" name="pergunta" value="<%= pergunta.id %>">
                     <button class="btn btn-success">Responder</button>
                 </form>
             </div>

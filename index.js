@@ -58,6 +58,18 @@ app.get("/pergunta/:id", (req, res) => {
     })
 })
 
+app.post("/responderPergunta", (req, res) => {
+    let corpo = req.body.corpo;
+    let perguntaId = req.body.pergunta;
+    respostaModel.create({
+        corpo: corpo,
+        perguntaId: perguntaId
+    }).then(() => {
+
+    });
+    res.redirect("/pergunta/" + perguntaId)
+})
+
 app.listen(port, () => {
     console.log(`Servidor rodando na porta: ${port}`);
 })
