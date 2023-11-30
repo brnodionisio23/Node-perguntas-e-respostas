@@ -49,9 +49,14 @@ app.get("/pergunta/:id", (req, res) => {
         where: { id: id }
     }).then((pergunta) => {
         if (pergunta != undefined) {
-            res.render("pergunta", {
-                pergunta: pergunta
-            });
+            respostaModel.findAll({
+                where: { perguntaId: pergunta.id }
+            }).then(respostas => {
+                res.render("pergunta", {
+                    pergunta: pergunta,
+                    respostas: respostas
+                })
+            })
         } else {
             res.redirect("/");
         }
@@ -65,9 +70,8 @@ app.post("/responderPergunta", (req, res) => {
         corpo: corpo,
         perguntaId: perguntaId
     }).then(() => {
-
+        res.redirect("/pergunta/" + perguntaId)
     });
-    res.redirect("/pergunta/" + perguntaId)
 })
 
 app.listen(port, () => {
