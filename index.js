@@ -50,7 +50,8 @@ app.get("/pergunta/:id", (req, res) => {
     }).then((pergunta) => {
         if (pergunta != undefined) {
             respostaModel.findAll({
-                where: { perguntaId: pergunta.id }
+                where: { perguntaId: pergunta.id },
+                order: [['id', 'DESC']]
             }).then(respostas => {
                 res.render("pergunta", {
                     pergunta: pergunta,
